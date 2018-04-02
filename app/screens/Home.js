@@ -6,6 +6,7 @@ import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Button';
 import { LastConverted } from '../components/Text';
+import { Header } from '../components/Header';
 
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
@@ -31,33 +32,41 @@ class Home extends Component {
     console.log('clear button pressed');
   };
 
+  handleOptionsPress = () => {
+    console.log('options press');
+  };
+
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="blue" barStyle="light-content" />
-        <Logo />
-        <InputWithButton
-          buttonText={TEMP_BASE_CURRENCY}
-          onPress={this.handlePressBaseCurrency}
-          defaultValue={TEMP_BASE_PRICE}
-          keyboardType="numeric"
-          onChangeText={this.handleChangeText}
-        />
-        <InputWithButton
-          editable={false}
-          buttonText={TEMP_QUOTE_CURRENCY}
-          onPress={this.handlePressQuoteCurrency}
-          value={TEMP_QUOTE_PRICE}
-        />
-        <LastConverted
-          date={TEMP_LAST_CONVERTED}
-          base={TEMP_BASE_CURRENCY}
-          quote={TEMP_QUOTE_CURRENCY}
-          conversionRate={TEMP_CONVERSION_RATE}
-        />
-        <ClearButton onPress={this.handleSwapCurrency} text="Reverse Currencies" />
+        <Header onPress={this.handleOptionsPress} />
+        <KeyboardAvoidingView behavior="padding">
+          <Logo />
+          <InputWithButton
+            buttonText={TEMP_BASE_CURRENCY}
+            onPress={this.handlePressBaseCurrency}
+            defaultValue={TEMP_BASE_PRICE}
+            keyboardType="numeric"
+            onChangeText={this.handleChangeText}
+          />
+          <InputWithButton
+            editable={false}
+            buttonText={TEMP_QUOTE_CURRENCY}
+            onPress={this.handlePressQuoteCurrency}
+            value={TEMP_QUOTE_PRICE}
+          />
+          <LastConverted
+            date={TEMP_LAST_CONVERTED}
+            base={TEMP_BASE_CURRENCY}
+            quote={TEMP_QUOTE_CURRENCY}
+            conversionRate={TEMP_CONVERSION_RATE}
+          />
+          <ClearButton text="clear" onPress={this.handle} />
+        </KeyboardAvoidingView>
       </Container>
     );
   }
 }
+
 export default Home;
